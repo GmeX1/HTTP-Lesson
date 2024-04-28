@@ -1,5 +1,7 @@
 import math
 
+import requests
+
 
 def get_delta(toponym_dict):
     envelope = toponym_dict['boundedBy']['Envelope']
@@ -21,3 +23,13 @@ def lonlat_distance(a, b):
 
     distance = math.sqrt(dx * dx + dy * dy)
     return distance
+
+
+def get_coords(geocode):
+    response = requests.get("http://geocode-maps.yandex.ru/1.x/", params={
+        "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+        "geocode": geocode,
+        "format": "json"
+    })
+    pos = response.json()["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]["Point"]["pos"]
+    return list(map(float, pos.split()))
