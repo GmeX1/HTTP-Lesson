@@ -1,7 +1,7 @@
 import sys
 from io import BytesIO
 # Этот класс поможет нам сделать картинку из потока байт
-from function import get_delta
+from functions import get_delta
 import requests
 from PIL import Image
 
